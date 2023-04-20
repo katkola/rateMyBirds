@@ -4,4 +4,4 @@ from flask_app.models.bird import bird
 
 @app.route('/')
 def home ():
-    return 'Birds'
+    return render_template ('profile.html')
