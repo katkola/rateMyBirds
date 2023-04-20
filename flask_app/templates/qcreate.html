@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>create Bird</title>
+</head>
+<body>
+    <div>
+        <h1>Creat a Bird</h1>
+        <a href="/">All Birds!</a>
+        <button><a href="/">Main Page</a></button>
+        <button><a href="/">Logout</a></button>
+    </div>
+    <form action="/" method="post">
+
+        <h2>Birth a new Species?</h2>
+        {% with messages = get_flashed_messages(category_filter=['species']) %}
+        {% if messages %}
+        <div class="alert alert-danger" role="alert">
+            <strong>Flashing Message</strong>
+                {% for message in messages %}
+                <p>{{message}}</p>
+                {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+    {% with messages = get_flashed_messages(category_filter=['location']) %}
+    {% if messages %}
+    <div class="alert alert-danger" role="alert">
+        <strong>Flashing Message</strong>
+            {% for message in messages %}
+            <p>{{message}}</p>
+            {% endfor %}
+    </div>
+    {% endif %}
+{% endwith %}
+{% with messages = get_flashed_messages(category_filter=['reason']) %}
+{% if messages %}
+<div class="alert alert-danger" role="alert">
+    <strong>Flashing Message</strong>
+        {% for message in messages %}
+        <p>{{message}}</p>
+        {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+        <div>
+            <label for="species">Species:</label>
+            <input type="text" name="species">
+        </div>
+        <div>
+            <label for="location">Location:</label>
+            <input type="text" name="location">
+        </div>
+        <div>
+            <label for="reason">Reason:</label>
+            <input type="text" name="reason">
+        </div>
+        
+        <input type="submit" value="(NOne Yet)">
+    </form>
+</body>
+</html>
