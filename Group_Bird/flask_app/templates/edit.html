@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>Welcome {{user.first_name}}</h1>
+        <a href="/">Dashboard!</a>
+        <button><a href="/">Create</a></button>
+        <button><a href="/logout">Logout</a></button>
+    </div>
+    <form action="/bird/edit/{{tree.id}}" method="post">
+        <h2>Select aspects of bird?</h2>
+        <!-- <div>
+            <label for="species">Species:</label>
+            <input type="text" name="species" value="{{bird.species}}">
+        </div>
+        <div class="form-group">
+            <label for="location">Location:</label>
+            <input type="text" name="location" value="{{bird.location}}">
+        </div>
+        <div class="form-group">
+            <label for="reason">Reason:</label>
+            <input type="text" name="reason" value="{{bird.reason}}" >
+        </div> -->
+        <input type="submit" value="New Bird">
+        
+    </form>
+</body>
+</html>
