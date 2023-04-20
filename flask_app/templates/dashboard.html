@@ -1,38 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <title>Rate My Birds</title>
 </head>
+
 <body>
-    <div class="navbar"></div>
-    <div class="main">
-        <h2>B I R D S</h2>
-        <div class="left">
-            <h4>All Birds</h4>
-            <table>
-                <tbody>
-                    {% for bird in birds %}
-                    <tr>
-                        <td>{{bird.species}}</td>
-                        <td> {{ bird.species}}</td>
-                        <td>
-                            <a href="/show/{{ bird.id }}">Show</a> 
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        
-        <div class="right">
-            <h4>New Bird???</h4>
-            <!-- Link to Add a Bird -->
+    <div class="">
+        <!-- other -->
+        <div id="background-image"
+            style="background-image: url('../static/Tropical\ birds-amico.png'); height: 100vh; width:100vw;">
+            <!-- navigation -->
+            <div class="navbar navbar-dark bg-dark p-3" style="width:100vw">
+                <a class="navbar-brand mx-2">Rate My Birds</a>
+                <div class="navbar-item">
+                    <div class="navbar-text me-2">Sample Text</div>
+                </div>
+            </div>
+            <!-- body -->
+            <div class="m-2" id="mainBody">
+                <!-- left side -->
+                <div class="card text-center">
+                    <div class="card-body">
+                        <a href="/" class="text-decoration-none h3">New Bird</a>
+                    </div>
+                </div>
+                <!-- right side -->
+                <div class="card bg-opacity-10">
+                    <h4 class="text-center">Created Birds</h4>
+                    <table>
+                        <tbody class="list-group">
+                            {% for bird in birds %}
+                            <tr class="list-group-item">
+                                <td>{{bird.species}}</td>
+                                <td> {{bird.user_id}}</td>
+                                <td>
+                                    <a href="/show/{{ bird.id }}">Show</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
     </div>
-    
 </body>
+
 </html>
