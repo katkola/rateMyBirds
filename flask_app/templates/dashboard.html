@@ -1,24 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <title>Rate My Birds</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/style.css">
+    <title>Dashboard</title>
 </head>
-<body>
-    <div class="navbar"></div>
-    <div class="main">
-        <h2>B I R D S</h2>
-        <div class="left">
-            <h4>All Birds</h4>
-        </div>
-        <div class="right">
-            <h4>New Bird???</h4>
 
+<body>
+    <div id="background-image">
+        <!-- navigation -->
+        <div id="navie" class="navbar p-3">
+            <a class="navbar-brand mx-2">Rate My Birds</a>
+            <div class="navbar-item">
+                <div class="navbar-text me-2">Sample Text</div>
+            </div>
+        </div>
+        <!-- body -->
+        <div class="m-2" id="mainBody">
+            <!-- left side -->
+            <div class="card text-center">
+                <div class="card-body">
+                    <a href="/" class="text-decoration-none h3">New Bird</a>
+                </div>
+            </div>
+            <!-- right side -->
+            <div class="card bg-opacity-10">
+                <h4 class="text-center">Created Birds</h4>
+                <ul class="list-group">
+                    {% for bird in birds %}
+                    <li class="list-group-item">
+                        <div class="list-inline-item"><a href="/show/{{ bird.id }}">{{bird.species}}</a></div>
+                        <div class="list-inline-item">Added By {{bird.user_id}}</div>
+                        <div class="list-inline-item">Avg Rating {{bird.getaverage()}}</div>
+
+                    </li>
+                    {% endfor %}
+                    <li class="list-group-item">
+                        <div class="list-inline-item"><a href="/show/{{ bird.id }}">Owl</a></div>
+                        <div class="list-inline-item">Added By {{bird.user_id}}</div>
+                        <div class="list-inline-item">Avg Rating</div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-    
 </body>
+
 </html>
