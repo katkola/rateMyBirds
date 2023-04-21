@@ -1,33 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/style.css">
     <title>New Bird</title>
 </head>
+
 <body>
-    <div>
-        <h1>Create a Bird</h1>
-        <button><a href="/">Home</a></button>
-        <button><a href="/">Logout</a></button>
+   <div id="background-image">
+     <!-- navigation -->
+     <div id="navie" class="navbar p-3">
+        <a class="navbar-brand mx-2">Rate My Birds</a>
+        <div class="navbar-item">
+            <div class="navbar-text me-2">Sample Text</div>
+        </div>
     </div>
-    <form action="/" method="post">
-        <div>
-            <label for="species">Species:</label>
-            <input type="text" name="species">
-        </div>
-        <div>
-            <label for="location">Location:</label>
-            <input type="text" name="location">
-        </div>
-        <div>
-            <label for="description">Description:</label>
-            <input type="text" name="description">
-        </div>
-        
-        <input type="submit">
-    </form>
+
+    <div class="main row justify-content-around card bg-danger bg-opacity-10 m-4" id="mainBody">
+    <div class="col row"  style="margin: 20px;">
+        <h1>Create a Bird</h1>
+    </div>
+    <div class="col row"  style="margin: 10px; min-width: 550px;">
+        <form action="/create/bird" method="post" class="" style="min-width: 500px; max-width: fit-content;">
+            <div class="form-group">
+                <label for="species">Species</label>
+                <input class="form-control" type="text" name="species">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input class="form-control" type="text" name="description">
+            </div>
+            <div class="form-group">
+                <label for="initialRating">Your Rating</label>
+                <input class="form-control" type="text" name="initialRating">
+            </div>
+            <div>
+                <button class="btn btn-primary mt-1" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+   </div>
+</div>
+
 </body>
+
 </html>

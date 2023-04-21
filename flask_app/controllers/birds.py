@@ -20,6 +20,10 @@ def create_bird():
     Bird.save_bird(data)
     return redirect("/")
 
+@app.route('/birds/view')
+def one_bird():
+    return render_template('oneBird.html')
+
 @app.route('/profile')
 def profile():
     data = {
