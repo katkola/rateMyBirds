@@ -15,9 +15,9 @@
    <div id="background-image">
      <!-- navigation -->
      <div id="navie" class="navbar p-3">
-        <a class="navbar-brand mx-2">Rate My Birds</a>
+        <a class="navbar-brand mx-2"  href="/dashboard">Rate My Birds</a>
         <div class="navbar-item">
-            <div class="navbar-text me-2">Sample Text</div>
+            <div class="navbar-text me-2"><a href="/logout">Logout</a></div>
         </div>
     </div>
 
@@ -26,7 +26,7 @@
         <h1>Create a Bird</h1>
     </div>
     <div class="col row"  style="margin: 10px; min-width: 550px;">
-        <form action="/create/bird" method="post" class="" style="min-width: 500px; max-width: fit-content;">
+        <form action="/bird/add" method="post" class="" style="min-width: 500px; max-width: fit-content;">
             <div class="form-group">
                 <label for="species">Species</label>
                 <input class="form-control" type="text" name="species">
@@ -35,11 +35,14 @@
                 <label for="description">Description</label>
                 <input class="form-control" type="text" name="description">
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="initialRating">Your Rating</label>
                 <input class="form-control" type="text" name="initialRating">
-            </div>
+            </div> -->
             <div>
+            <div>
+                <input type="hidden" name="user_id" value="{user.id}">
+            </div>
                 <button class="btn btn-primary mt-1" type="submit">Submit</button>
             </div>
         </form>

@@ -2,22 +2,26 @@ from flask_app.config.mysqlconnection import connectToMySQL
 
 
 class Bird:
-    db_name = 'birds_schema'
+    db_name = 'birds-schema'
 
     def __init__(self, data):
         self.id = data['id']
         self.species = data['species']
-        self.location = data['location']
         self.description = data['description']
         self.user_id = data['user_id']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
-        ratings = []
+
+    @classmethod
+    def save(cls,data):
+        query = "INSERT INTO birds (species, description, user_id, created_at,updated_at) VALUES(%(species)s,%(description)s, %(user_id)s,NOW(),NOW())"
+        return connectToMySQL(cls.db_name).query_db(query,data)
+
 
     @classmethod
     def get_all(cls):
         query = "SELECT * FROM birds;"
-        results = connectToMySQL('cls.db_name').query_db(query)
+        results = connectToMySQL(cls.db_name).query_db(query)
         birds = []
         for i in results:
             birds.append(cls(i))
@@ -26,7 +30,7 @@ class Bird:
     @classmethod
     def get_birds_by_user(cls, data):
         query = "SELECT * FROM birds WHERE birds.user_id = %(id)s;"
-        results = connectToMySQL(cls.db_name).query_db(query)
+        results = connectToMySQL(cls.db_name).query_db(query, data)
         birds = []
         for bird in results:
             birds.append(cls(bird))
@@ -43,10 +47,10 @@ class Bird:
     @staticmethod
     def validate_bird(bird):
         is_valid = True
-        if():
-            # already exists
+        if len(bird['species'])<3 :
+
             return False
-        if():
-            # other validation if necessary
+        if len(bird['description'])<3 :
+
             return False
         return is_valid

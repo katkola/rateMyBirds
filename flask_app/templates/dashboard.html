@@ -15,9 +15,9 @@
     <div id="background-image">
         <!-- navigation -->
         <div id="navie" class="navbar p-3">
-            <a class="navbar-brand mx-2">Rate My Birds</a>
+            <a class="navbar-brand mx-2" href="/dashboard">Rate My Birds</a>
             <div class="navbar-item">
-                <div class="navbar-text me-2">Sample Text</div>
+                <div class="navbar-text me-2"><a href="/logout">Logout</a></div>
             </div>
         </div>
         <!-- body -->
@@ -25,7 +25,7 @@
             <!-- left side -->
             <div class="card text-center">
                 <div class="card-body">
-                    <a href="/" class="text-decoration-none h3">New Bird</a>
+                    <a href="/birds/new" class="text-decoration-none h3">New Bird</a>
                 </div>
             </div>
             <!-- right side -->
@@ -34,17 +34,10 @@
                 <ul class="list-group">
                     {% for bird in birds %}
                     <li class="list-group-item">
-                        <div class="list-inline-item"><a href="/show/{{ bird.id }}">{{bird.species}}</a></div>
+                        <div class="list-inline-item">{{bird.species}}</a></div>
                         <div class="list-inline-item">Added By {{bird.user_id}}</div>
-                        <div class="list-inline-item">Avg Rating {{bird.getaverage()}}</div>
-
                     </li>
                     {% endfor %}
-                    <li class="list-group-item">
-                        <div class="list-inline-item"><a href="/show/{{ bird.id }}">Owl</a></div>
-                        <div class="list-inline-item">Added By {{bird.user_id}}</div>
-                        <div class="list-inline-item">Avg Rating</div>
-                    </li>
                 </ul>
             </div>
         </div>
