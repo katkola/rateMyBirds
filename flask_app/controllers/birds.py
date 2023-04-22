@@ -19,11 +19,16 @@ def create_bird():
     Bird.save(data)
     return redirect("/dashboard")
 
-@app.route('/birds/view')
-def one_bird():
+@app.route('/birds/view/<birdId>')
+def one_bird(birdId):
     if 'user_id' not in session:
         return redirect('/')
-    return render_template('oneBird.html')
+
+    data = {
+        "id": birdId
+    }
+
+    return render_template('oneBird.html', bird=Bird.get_one(data))
 
 @app.route('/birds/new')
 def bird_form():
