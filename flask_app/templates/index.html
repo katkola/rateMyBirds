@@ -15,9 +15,9 @@
     <div id="background-image">
         <!-- navigation -->
         <div id="navie" class="navbar p-3">
-            <a class="navbar-brand mx-2">Rate My Birds</a>
+            <a class="navbar-brand mx-2"  href="/dashboard">Rate My Birds</a>
             <div class="navbar-item">
-                <div class="navbar-text me-2">Sample Text</div>
+                <div class="navbar-text me-2"><a href="/logout">Logout</a></div>
             </div>
         </div>
         <div class="row" id="mainBody">
@@ -29,26 +29,33 @@
                         Text Sample Text Sample Text
                         Sample Text Sample Text Sample Text Sample Text Sample Text Sample Text Sample Text
                         Sample Text Sample Text Sample Text Sample Text Sample Text Sample Text
-                        Sample Text Sample Text Sample Text Sample Text Sample Text Sample Text Sample Text
-                        Sample Text Sample Text Sample Text Sample Text
                     </p>
                 </div>
             </div>
             <div class="col-sm-7 col-md-7 col-lg-5 col-sm-auto m-5 card-body container-fluid bg-opacity-10 bg-danger"
                 style="border-radius: 5px;">
                 <h2 class="m-2">Join Birds</h2>
+                <!-- Show Flash Errors -->
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                <p>{{message}}</p>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
                 <div class="m-2">
-                    <!-- Register -->
+                    <!-- Register Div -->
                     <div class="card-body">
                         <h4 class="card-header">Register</h4>
-                        <form action="/create/user" method="post">
+                        <!-- Reg Form -->
+                        <form action="/register" method="post">
                             <div class="form-group">
-                                <label for="fname">First Name</label>
-                                <input class="form-control" type="text" name="fname">
+                                <label for="firstname">First Name</label>
+                                <input class="form-control" type="text" name="firstname">
                             </div>
                             <div class="form-group">
-                                <label for="lname">Last Name</label>
-                                <input class="form-control" type="text" name="lname">
+                                <label for="lastname">Last Name</label>
+                                <input class="form-control" type="text" name="lastname">
                             </div>
                             <div class="form-group">
                                 <label for="email">Email: </label>
@@ -71,6 +78,7 @@
                     <!-- Login -->
                     <div class="card-body">
                         <h4 class="card-header">Login</h4>
+                        <!-- Login Form -->
                         <form action="/login" method="post">
                             <div class="form-group">
                                 <label for="email">Email: </label>

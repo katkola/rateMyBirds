@@ -1,11 +1,16 @@
 from flask import render_template, session,redirect, request,flash
-
+from flask_app import app
 from flask_bcrypt import Bcrypt
 from flask_app.models.bird import Bird
 from flask_app.models.user import User
 
 bcrypt=Bcrypt(app)
 
+@app.route('/')
+def index():
+    if 'user_id' in session:
+        return redirect('/dashboard')
+    return render_template("index.html")
 
 @app.route('/register',methods=['POST'])
 def register():
@@ -14,16 +19,16 @@ def register():
         return redirect("/")
 
     data = {
-        "first_name": request.form["first_name"],
-        "last_name": request.form["last_name"],
+        "firstname": request.form["firstname"],
+        "lastname": request.form["lastname"],
         "email": request.form["email"],
         "password":  bcrypt.generate_password_hash(request.form["password"])
     }
     id = User.save(data)
 
     session['user_id'] = id
-    session['first_name']= request.form['first_name']
-    return redirect('/user')
+    session['firstname']= request.form['firstname']
+    return redirect('/dashboard')
 
 
 
@@ -43,29 +48,7 @@ def login():
         return redirect("/")
 
     session['user_id'] = user.id
-    return redirect('/user')
-    
-@app.route("/dashboard")
-def user():
-    if 'user_id' not in session:
-        return redirect('/')
-    data = {
-        "id": session['user_id']
-    }
-    user = User.get_one(data)
-
-    return render_template("dashboard.html", user=user,birds=Bird.get_all())
-
-@app.route("/profile")
-def profile():
-    if 'user_id' not in session:
-        return redirect('/')
-    data = {
-        "id": session['user_id']
-    }
-    user = User.get_one(data)
-
-    return render_template("dashboard.html", user=user,birds=Bird.get_by_user())
+    return redirect('/dashboard')
 
 
 
@@ -74,4 +57,13 @@ def logout():
     session.clear()
     return redirect('/')
 
-    
+@app.route("/profile/<userId>")
+def profile(userId):
+    if 'user_id' not in session:
+        return redirect('/')
+    data = {
+        "id": userId
+    }
+    user = User.get_one(data)
+
+    return render_template("profile.html", user=user, birds=Bird.get_birds_by_user(data))
