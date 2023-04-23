@@ -22,7 +22,6 @@ class Bird:
         query = "INSERT INTO birds (species, description, user_id, created_at,updated_at, image_url) VALUES(%(species)s,%(description)s, %(user_id)s,NOW(),NOW(), %(image_url)s)"
         return connectToMySQL(cls.db_name).query_db(query,data)
 
-
     @classmethod
     def get_all(cls):
         query = "SELECT * FROM birds LEFT JOIN users ON birds.user_id = users.id;"

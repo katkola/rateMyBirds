@@ -1,5 +1,5 @@
 from flask_app import app
-from flask import render_template,redirect,request,session,flash
+from flask import render_template,redirect,request,session,flash, url_for
 from flask_app.models.bird import Bird
 from flask_app.models.user import User
 from flask_app.models.rating import Rating
@@ -30,8 +30,9 @@ def create_rating():
         'bird_id': request.form['bird_id'],
         'user_id': session['user_id']
     }
+    birdId = data['bird_id']
     Rating.save(data)
-    return('/birds/single/<bird_id>')
+    return redirect(url_for('one', bird_id=birdId))
 
 
 @app.route('/birds/single/<int:bird_id>')
@@ -40,7 +41,9 @@ def one(bird_id):
         "id":bird_id
     }
     bird=Bird.get_one(data)
-    return render_template("oneBird.html", bird=bird)
+    ratings = Rating.get_ratings_for_bird(data)
+    avg_rating = Rating.get_average_rating(data)
+    return render_template("oneBird.html", bird=bird, avg_rating=avg_rating, ratings=ratings)
 
 @app.route('/birds/new')
 def bird_form():

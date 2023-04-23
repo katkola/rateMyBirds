@@ -12,40 +12,28 @@
 </head>
 
 <body>
-    <div id="background-image">
-        <!-- navigation -->
-        <div id="navie" class="navbar p-3">
+    <div style="background-image: url('../static/img/tropicalbirdsamico.png');">
+        <div id="navie" class="navbar p-3" style="width:100vw; background-color: #D8E0F5; opacity: .8;">
             <a class="navbar-brand mx-2" href="/dashboard">Rate My Birds</a>
             <div class="navbar-item">
-                <div class="navbar-text me-2"><a href="/logout">Logout</a></div>
+                <div class="navbar-text m-1"><a href="/logout">Logout</a></div>
             </div>
         </div>
-        <div class="main row align-content-around">
+        <div class="main row align-content-around m-1">
 
-            <div class="col row align-content-center" style="margin-left: 10px; min-width: 300px;">
+            <div class="col row align-content-center m-1" style="margin-left: 10px; min-width: 300px;">
                 <div id="left" class="col card bg-opacity-10 bg-danger">
                     <h4>Look At This Bird</h4>
-                    <!-- Picture, Information -->
-                    <div class="bg-image">
-                        <img src={{bird.image_url}} alt={{bird.description}}
-                            class="img-thumbnail card-img">
-                    </div>
-                    <!-- https://www.pexels.com/photo/photography-of-small-blue-and-brown-bird-792416/ -->
+                    <img src={{bird.image_url}} alt={{bird.description}} class="img-thumbnail card-img">
                     Bird Species: {{bird.species}}<br />
-                    Bird Description: {{bird.description}}<br/>
+                    Bird Description: {{bird.description}}<br />
                     <a href="/profile/{{bird.user_id}}">Entered By: {{bird.user.firstname}}</a>
                 </div>
             </div>
-
-            <div class="col row align-content-center" style="margin-right:5px; min-width: 300px">
-                <div class="card bg-opacity-10 bg-danger col m-2">
+            <div class="col row align-content-center m-1" style="min-width: 300px">
+                <div class="card bg-opacity-10 bg-danger col m-1">
                     <h4>What do you think?</h4>
-
-                    <!-- rating.js file -->
-                    <div class="container">
-                        <span id="rateMe1"></span>
-                    </div>
-                    <form class="/rating/add" method="post" class="" style="min-width: 500px; max-width: fit-content;">
+                    <form action="/rating/add" method="POST" class="" style="min-width: 500px; max-width: fit-content;">
                         <div>
                             <label for="rating_value"></label>
                             <select name="rating_value" id="">
@@ -57,17 +45,25 @@
                             </select>
                         </div>
                         <div>
-                            <input type="hidden" name="bird_id" value={{bird.id}} >
+                            <input type="hidden" name="bird_id" value={{bird.id}}>
                         </div>
                         <button type="submit" class="btn-info btn">Submit Rating</button>
                     </form>
+                    <div>
+                        <h4>Average RATING {{avg_rating}}</h4>
+                        <h4>All Ratings</h4>
+                        <ul>
+                            {% for rating in ratings %}
+                                <li>{{rating.user.firstname}} : {{rating.value}}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
             </div>
 
         </div>
-    </div>
 
+    </div>
 </body>
-<script src="../static/js/rating.js"></script>
 
 </html>
