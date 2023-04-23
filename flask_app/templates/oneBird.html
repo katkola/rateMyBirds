@@ -15,7 +15,7 @@
     <div id="background-image">
         <!-- navigation -->
         <div id="navie" class="navbar p-3">
-            <a class="navbar-brand mx-2"  href="/dashboard">Rate My Birds</a>
+            <a class="navbar-brand mx-2" href="/dashboard">Rate My Birds</a>
             <div class="navbar-item">
                 <div class="navbar-text me-2"><a href="/logout">Logout</a></div>
             </div>
@@ -44,15 +44,20 @@
                     <div class="container">
                         <span id="rateMe1"></span>
                     </div>
-                    <form class="">
-                        <label for="rating_value"></label>
-                        <select name="rating_value" id="">
-                            <option value="1">1: Weak bird</option>
-                            <option value="2">2: Meh...</option>
-                            <option value="3">3: Survived Natural Selection</option>
-                            <option value="4">4: Pretty Decent Bird</option>
-                            <option value="5">EXCELLENT BIRD</option>
-                        </select>
+                    <form class="/rating/add" method="post" class="" style="min-width: 500px; max-width: fit-content;">
+                        <div>
+                            <label for="rating_value"></label>
+                            <select name="rating_value" id="">
+                                <option value="1">1: Weak bird</option>
+                                <option value="2">2: Meh...</option>
+                                <option value="3">3: Survived Natural Selection</option>
+                                <option value="4">4: Pretty Decent Bird</option>
+                                <option value="5">5: EXCELLENT BIRD</option>
+                            </select>
+                        </div>
+                        <div>
+                            <input type="hidden" name="bird_id" value={{bird.id}} >
+                        </div>
                         <button type="submit" class="btn-info btn">Submit Rating</button>
                     </form>
                 </div>
