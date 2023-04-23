@@ -2,6 +2,7 @@ from flask_app import app
 from flask import render_template,redirect,request,session,flash
 from flask_app.models.bird import Bird
 from flask_app.models.user import User
+from flask_app.models.rating import Rating
 
 
 @app.route('/bird/add', methods=["POST"])
@@ -11,7 +12,7 @@ def create_bird():
         return redirect('/birds/new')
 
     data = {
-        'species': request.form['species'],
+        'species': request.form['species'],z
         'description': request.form['description'],
         'user_id': session['user_id'],
         'image_url': Bird.get_bird_image(request.form['description'])
@@ -19,6 +20,19 @@ def create_bird():
     
     Bird.save(data)
     return redirect("/dashboard")
+
+@app.route('/rating/add', methods=["POST"] )
+def create_rating():
+    if 'user_id' not in session:
+        return redirect('/')
+    data = {
+        'value': request.form['rating_value'],
+        'bird_id': request.form['bird_id'],
+        'user_id': session['user_id']
+    }
+    Rating.save(data)
+    return('/birds/single/<bird_id>')
+
 
 @app.route('/birds/single/<int:bird_id>')
 def one(bird_id):

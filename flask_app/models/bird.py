@@ -70,7 +70,7 @@ class Bird:
 
             return False
         return is_valid
-
+        
     @staticmethod
     def get_bird_image(description):
         url = "https://api.unsplash.com/photos/random"
