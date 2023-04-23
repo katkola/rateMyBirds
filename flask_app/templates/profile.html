@@ -22,32 +22,29 @@
     </div>
     <!-- body -->
     <div class="main row justify-content-around" id="mainBody">
-        <div id="page-title" class="h3" style="text-align: center; min-width: 500px">Welcome to My Page</div>
+        <div id="page-title" class="h3" style="text-align: center; min-width: 500px">
+            Birds Entered By {{user.firstname}} {{user.lastname}}
+        </div>
         <!-- left side -->
-        <div class="col row align-content-start"  style="margin: 20px; min-width: 550px; max-width: 650px;">
+        <!-- <div class="col row align-content-start"  style="margin: 20px; min-width: 550px; max-width: 650px;">
             <div id="left" class="col card bg-opacity-10 bg-danger">
-                <h4></h4>
+                <h4></h4> -->
                 <!-- Picture, Information -->
-                <div class="bg-image hover-zoom" style="min-width: 500px; max-width: 600px; margin: auto;">
+                <!-- <div class="bg-image hover-zoom" style="min-width: 500px; max-width: 600px; margin: auto;">
                     <img src="../static/img/rust_sky.png" alt="test img" class="img-thumbnail">
                 </div>
                 Name: {{user.firstname}} <br/>
                 Favorite Bird: Tweety
             </div>
-        </div>
+        </div> -->
         <!-- right side -->
         <div class="col row align-content-start"  style="margin: 20px; min-width: 300px; max-width: 650px;">
             <div class="col card-body container-fluid">
-                <h4>Created Birds</h4>
+                <!-- <h4>Created Birds</h4> -->
                 <ul class="list-group">
                     {% for bird in birds %}
-                <li class="list-group-item">{{bird.species}}</li>
+                    <li class="list-group-item"><a href="/birds/single/{{bird.id}}">{{bird.species}}</a></li>
                     {% endfor %}
-                    <li class="list-group-item">Cardinal(-Test)</li>
-                    <li class="list-group-item">Tweety(-Test)</li>
-                    <li class="list-group-item">Emu(-Test)</li>
-                    <li class="list-group-item">Falcon(-Test)</li>
-                    <li class="list-group-item">Pelican(-Test)</li>
                 </ul>
             </div>
         </div>

@@ -12,7 +12,7 @@ def create_bird():
         return redirect('/birds/new')
 
     data = {
-        'species': request.form['species'],z
+        'species': request.form['species'],
         'description': request.form['description'],
         'user_id': session['user_id'],
         'image_url': Bird.get_bird_image(request.form['description'])

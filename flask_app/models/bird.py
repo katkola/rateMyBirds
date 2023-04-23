@@ -46,6 +46,7 @@ class Bird:
         results = connectToMySQL(cls.db_name).query_db(query, data)
         birds = []
         for bird in results:
+            bird['user'] = User.get_one({"id": bird["user_id"]})
             birds.append(cls(bird))
         return birds
 
