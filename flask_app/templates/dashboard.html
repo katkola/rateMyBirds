@@ -34,9 +34,13 @@
                 <ul class="list-group">
                     {% for bird in birds %}
                     <li class="list-group-item">
-                        <div  class="list-inline-item">{{bird.species}}</a></div>
-                        <div class="list-inline-item">Added By {{bird.user.firstname}}</div>
-                        <div><a href="/birds/single/{{bird.id}}"> View in environment</a></div>
+                        <div class="list-inline-item">
+                            <a href="/birds/single/{{bird.id}}">{{bird.species}}</a>
+                        </div>
+                        <div class="list-inline-item">
+                            Added By 
+                            <a href="/profile/{{bird.user_id}}">{{bird.user.firstname}}</a>
+                        </div>
                     </li>
                     {% endfor %}
                 </ul>
