@@ -1,5 +1,8 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models.user import User
+import json
+import requests
+from flask_app.config.config import api_key
 
 class Bird:
     db_name = 'birds-schema'
@@ -11,11 +14,12 @@ class Bird:
         self.user_id = data['user_id']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
+        self.image_url = data['image_url']
         self.user = data["user"]
 
     @classmethod
     def save(cls,data):
-        query = "INSERT INTO birds (species, description, user_id, created_at,updated_at) VALUES(%(species)s,%(description)s, %(user_id)s,NOW(),NOW())"
+        query = "INSERT INTO birds (species, description, user_id, created_at,updated_at, image_url) VALUES(%(species)s,%(description)s, %(user_id)s,NOW(),NOW(), %(image_url)s)"
         return connectToMySQL(cls.db_name).query_db(query,data)
 
 
@@ -42,6 +46,7 @@ class Bird:
         results = connectToMySQL(cls.db_name).query_db(query, data)
         birds = []
         for bird in results:
+            bird['user'] = User.get_one({"id": bird["user_id"]})
             birds.append(cls(bird))
         return birds
 
@@ -66,3 +71,14 @@ class Bird:
 
             return False
         return is_valid
+        
+    @staticmethod
+    def get_bird_image(description):
+        url = "https://api.unsplash.com/photos/random"
+        parameters = {
+            "query": description,
+            "client_id": api_key
+        }
+        response = requests.get(url, params=parameters)
+        print(type(json.loads(response.content)))
+        return json.loads(response.content)['urls']['raw']
