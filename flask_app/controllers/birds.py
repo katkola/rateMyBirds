@@ -14,7 +14,8 @@ def create_bird():
     data = {
         'species': request.form['species'],z
         'description': request.form['description'],
-        'user_id': session['user_id']
+        'user_id': session['user_id'],
+        'image_url': Bird.get_bird_image(request.form['description'])
     }
     
     Bird.save(data)
