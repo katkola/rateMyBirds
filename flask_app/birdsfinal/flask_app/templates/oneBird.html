@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/style.css">
+    <title>View Bird</title>
+</head>
+
+<body>
+    <div id="background-image">
+        <!-- navigation -->
+        <div id="navie" class="navbar p-3">
+            <a class="navbar-brand mx-2"  href="/dashboard">Rate My Birds</a>
+            <div class="navbar-item">
+                <div class="navbar-text me-2"><a href="/logout">Logout</a></div>
+            </div>
+        </div>
+        <div class="main row align-content-around vh-100">
+
+            <div class="col row align-content-center" style="margin-left: 10px; min-width: 300px;">
+                <div id="left" class="col card bg-opacity-10 bg-danger">
+                    <h4>Look At This Bird</h4>
+                    <!-- Picture, Information -->
+                    <div class="bg-image hover-zoom">
+                        <img src="../static/img/pexels-tina-nord-792416.jpg" alt="Photo by Tina Nord on Pexels.com"
+                            class="img-thumbnail">
+                    </div>
+                    <!-- https://www.pexels.com/photo/photography-of-small-blue-and-brown-bird-792416/ -->
+                    Bird Species: Lil Guy<br />
+                    Bird Description: He's blue and likes seeds
+                </div>
+            </div>
+
+            <div class="col row align-content-center" style="margin-right:5px; min-width: 300px">
+                <div class="card bg-opacity-10 bg-danger col m-2">
+                    <h4>What do you think?</h4>
+
+                    <!-- rating.js file -->
+                    <div class="container">
+                        <span id="rateMe1"></span>
+                    </div>
+                    <form class="">
+                        <label for="rating_value"></label>
+                        <select name="rating_value" id="">
+                            <option value="1">1: Weak bird</option>
+                            <option value="2">2: Meh...</option>
+                            <option value="3">3: Survived Natural Selection</option>
+                            <option value="4">4: Pretty Decent Bird</option>
+                            <option value="5">EXCELLENT BIRD</option>
+                        </select>
+                        <button type="submit" class="btn-info btn">Submit Rating</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+<script src="../static/js/rating.js"></script>
+
+</html>
