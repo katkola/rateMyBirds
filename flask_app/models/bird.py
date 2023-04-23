@@ -1,5 +1,5 @@
 from flask_app.config.mysqlconnection import connectToMySQL
-
+from flask_app.models.user import User
 
 class Bird:
     db_name = 'birds-schema'
@@ -11,6 +11,7 @@ class Bird:
         self.user_id = data['user_id']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
+        self.user = data["user"]
 
     @classmethod
     def save(cls,data):
@@ -20,11 +21,19 @@ class Bird:
 
     @classmethod
     def get_all(cls):
-        query = "SELECT * FROM birds;"
+        query = "SELECT * FROM birds LEFT JOIN users ON birds.user_id = users.id;"
         results = connectToMySQL(cls.db_name).query_db(query)
+
         birds = []
-        for i in results:
-            birds.append(cls(i))
+
+        for var in results:
+            # birds.append(cls(var))
+            this_user = User.get_one({"id": var["user_id"]})
+
+        
+            var["user"] = this_user
+            this_info = cls(var)
+            birds.append(this_info)
         return birds
 
     @classmethod
@@ -40,6 +49,9 @@ class Bird:
     def get_one(cls, data):
         query = "SELECT * FROM birds WHERE id = %(id)s;"
         results = connectToMySQL(cls.db_name).query_db(query, data)
+        user = User.get_one({"id": results[0]["user_id"]})
+        results[0]["user"] = user 
+
         if len(results) < 1:
             return False
         return cls(results[0])
