@@ -7,3 +7,9 @@
 #navie{
     width:100vw; background-color: #D8E0F5; opacity: .8;
 }
+
+.btn-star{
+    height: 26px;
+    background-image: url('../static/star.svg');
+    background-size:cover
+}

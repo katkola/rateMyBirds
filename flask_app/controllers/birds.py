@@ -66,3 +66,7 @@ def dashboard():
     user = User.get_one(data)
 
     return render_template("dashboard.html", birds=Bird.get_all())
+
+@app.route('/stars')
+def startest():
+    return render_template('stars.html')
