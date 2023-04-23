@@ -81,3 +81,9 @@ class Bird:
         response = requests.get(url, params=parameters)
         print(type(json.loads(response.content)))
         return json.loads(response.content)['urls']['raw']
+    
+    @classmethod
+    def delete_one(cls, data):
+        query = "DELETE FROM birds WHERE id = %(id)s"
+        results = connectToMySQL(cls.db_name).query_db(query, data)
+        return results

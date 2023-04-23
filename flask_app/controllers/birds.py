@@ -12,7 +12,7 @@ def create_bird():
         return redirect('/birds/new')
 
     data = {
-        'species': request.form['species'],z
+        'species': request.form['species'],
         'description': request.form['description'],
         'user_id': session['user_id'],
         'image_url': Bird.get_bird_image(request.form['description'])
@@ -63,3 +63,15 @@ def dashboard():
     user = User.get_one(data)
 
     return render_template("dashboard.html", birds=Bird.get_all())
+
+@app.route("/birds/delete/<int:bird_id>")
+def delete_one(bird_id):
+    if 'user_id' not in session:
+        return redirect('/')
+    data = {
+        "id": bird_id
+    }
+    bird = Bird.get_one(data)
+    if bird.user_id == session["user_id"]:
+        Bird.delete_one(data)
+    return redirect("/")

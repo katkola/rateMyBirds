@@ -30,9 +30,12 @@
                 <img src={{bird.image_url}} alt={{bird.description}}
                             class="img-thumbnail">
                     </div>
-                    <!-- https://www.pexels.com/photo/photography-of-small-blue-and-brown-bird-792416/ -->
-                    Bird Species: {{bird.species}}<br />
-                    Bird Description: {{bird.description}}
+                    <div>
+                        <!-- https://www.pexels.com/photo/photography-of-small-blue-and-brown-bird-792416/ -->
+                        Bird Species: {{bird.species}}<br />
+                        Bird Description: {{bird.description}}
+                    </div>
+                    <a href="/birds/delete/{{bird.id}}"><button class="btn btn-danger">Delete Bird</button></a>
                 </div>
             </div>
 
