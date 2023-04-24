@@ -1,5 +1,6 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models.user import User
+from flask_app.models.rating import Rating
 import json
 import requests
 from flask_app.config.config import api_key
@@ -16,6 +17,7 @@ class Bird:
         self.updated_at = data['updated_at']
         self.image_url = data['image_url']
         self.user = data["user"]
+        self.avg_rating = 0
 
     @classmethod
     def save(cls,data):
@@ -42,11 +44,10 @@ class Bird:
 
         for var in results:
             # birds.append(cls(var))
-            this_user = User.get_one({"id": var["user_id"]})
-
-        
-            var["user"] = this_user
+            calculated_rating = Rating.get_average_rating({'id': var['id']})
+            var["user"] = User.get_one({"id": var["user_id"]})
             this_info = cls(var)
+            this_info.avg_rating = calculated_rating
             birds.append(this_info)
         return birds
 
