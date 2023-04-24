@@ -9,7 +9,10 @@
 }
 
 .btn-star{
-    height: 26px;
-    background-image: url('../static/star.svg');
-    background-size:cover
+    height: 30px;
+    width: 30px;
+    background-size:cover;
+    background-color: gold;
+    color: black;
+    border-radius: 30%;
 }

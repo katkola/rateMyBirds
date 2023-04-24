@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div style="background-image: url('../static/img/tropicalbirdsamico.png');">
+    <div id="background-image">
         <div id="navie" class="navbar p-3" style="width:100vw; background-color: #D8E0F5; opacity: .8;">
             <a class="navbar-brand mx-2" href="/dashboard">Rate My Birds</a>
             <div class="navbar-item">
@@ -35,14 +35,12 @@
                     <h4>What do you think?</h4>
                     <form action="/rating/add" method="POST" class="" style="min-width: 500px; max-width: fit-content;">
                         <div>
-                            <label for="rating_value"></label>
-                            <select name="rating_value" id="">
-                                <option value="1">1: Weak bird</option>
-                                <option value="2">2: Meh...</option>
-                                <option value="3">3: Survived Natural Selection</option>
-                                <option value="4">4: Pretty Decent Bird</option>
-                                <option value="5">5: EXCELLENT BIRD</option>
-                            </select>
+                                <label for="rating_value"></label>
+                                <input class="btn-star" name="rating_value" type="button" onclick="yup(value)" value="1" />
+                                <input class="btn-star" name="rating_value" type="button" onclick="yup(value)" value="2" />
+                                <input class="btn-star" name="rating_value" type="button" onclick="yup(value)" value="3" />
+                                <input class="btn-star" name="rating_value" type="button" onclick="yup(value)" value="4" />
+                                <input class="btn-star" name="rating_value" type="button" onclick="yup(value)" value="5" />
                         </div>
                         <div>
                             <input type="hidden" name="bird_id" value={{bird.id}}>
@@ -54,7 +52,7 @@
                         <h4>All Ratings</h4>
                         <ul>
                             {% for rating in ratings %}
-                                <li>{{rating.user.firstname}} : {{rating.value}}</li>
+                            <li>{{rating.user.firstname}} : {{rating.value}}</li>
                             {% endfor %}
                         </ul>
                     </div>
@@ -65,5 +63,11 @@
 
     </div>
 </body>
+<script type="text/javascript">
+    function yup(value) {
+        content = "yup" + value
+        document.getElementById('star-test').innerHTML += content;
+    }
+</script>
 
 </html>
