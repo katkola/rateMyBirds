@@ -71,7 +71,7 @@ def dashboard():
         "id": session['user_id']
     }
     user = User.get_one(data)
-    return render_template("dashboard.html", birds=Bird.get_all())
+    return render_template("dashboard.html", birds=Bird.get_all(), user=user)
 
 @app.route('/edit/<int:bird_id>')
 def edit(bird_id):
