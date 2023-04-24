@@ -1,6 +1,5 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models.user import User
-from flask_app.models.rating import Rating
 import json
 import requests
 from flask_app.config.config import api_key
@@ -17,13 +16,11 @@ class Bird:
         self.updated_at = data['updated_at']
         self.image_url = data['image_url']
         self.user = data["user"]
-        self.avg_rating = 0
 
     @classmethod
     def save(cls,data):
         query = "INSERT INTO birds (species, description, user_id, created_at,updated_at, image_url) VALUES(%(species)s,%(description)s, %(user_id)s,NOW(),NOW(), %(image_url)s)"
         return connectToMySQL(cls.db_name).query_db(query,data)
-
 
     @classmethod
     def update(cls,data):
@@ -34,7 +31,6 @@ class Bird:
             }
             return connectToMySQL(cls.db_user).query_db(query,data)
 
-
     @classmethod
     def get_all(cls):
         query = "SELECT * FROM birds LEFT JOIN users ON birds.user_id = users.id;"
@@ -44,10 +40,11 @@ class Bird:
 
         for var in results:
             # birds.append(cls(var))
-            calculated_rating = Rating.get_average_rating({'id': var['id']})
-            var["user"] = User.get_one({"id": var["user_id"]})
+            this_user = User.get_one({"id": var["user_id"]})
+
+        
+            var["user"] = this_user
             this_info = cls(var)
-            this_info.avg_rating = calculated_rating
             birds.append(this_info)
         return birds
 
@@ -93,7 +90,6 @@ class Bird:
         response = requests.get(url, params=parameters)
         print(type(json.loads(response.content)))
         return json.loads(response.content)['urls']['raw']
-
 
     @classmethod
     def update(cls,data):     
