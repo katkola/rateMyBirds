@@ -92,9 +92,9 @@ class Bird:
         print(type(json.loads(response.content)))
         return json.loads(response.content)['urls']['raw']
 
-    @classmethod
-    def update(cls,data):     
-            query = "UPDATE birds SET species=%(species)s,description=%(description)s WHERE id = %(id)s;"
-        
 
-            return connectToMySQL(cls.db_name).query_db(query,data)
+    @classmethod
+    def delete_one(cls, data):
+        query = "DELETE FROM birds WHERE id = %(id)s"
+        results = connectToMySQL(cls.db_name).query_db(query, data)
+        return results
