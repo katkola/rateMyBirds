@@ -24,7 +24,6 @@ class Bird:
         query = "INSERT INTO birds (species, description, user_id, created_at,updated_at, image_url) VALUES(%(species)s,%(description)s, %(user_id)s,NOW(),NOW(), %(image_url)s)"
         return connectToMySQL(cls.db_name).query_db(query,data)
 
-
     @classmethod
     def update(cls,data):
             query = "UPDATE birds SET species=%(species)s,description=%(description)s WHERE id = %(id)s;"
@@ -33,7 +32,6 @@ class Bird:
                 "description": description
             }
             return connectToMySQL(cls.db_user).query_db(query,data)
-
 
     @classmethod
     def get_all(cls):
@@ -93,7 +91,6 @@ class Bird:
         response = requests.get(url, params=parameters)
         print(type(json.loads(response.content)))
         return json.loads(response.content)['urls']['raw']
-
 
     @classmethod
     def update(cls,data):     

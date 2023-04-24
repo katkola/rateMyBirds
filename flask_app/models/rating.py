@@ -2,7 +2,6 @@ from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models.user import User
 
 class Rating:
-
     db_name = 'birds-schema'
     def __init__(self, data):
         self.id = data['id']
@@ -58,13 +57,11 @@ class Rating:
                 FROM Ratings
                 WHERE bird_id= %(id)s'''
         results = connectToMySQL(cls.db_name).query_db(query, data)
-        
         ratings = []
         if not results:
             return ratings
         for rating in results:
             user = User.get_one({"id": rating["user_id"]})
-
             rating['user'] = user
             ratings.append(cls(rating))
         return ratings
@@ -72,9 +69,8 @@ class Rating:
 
     @classmethod
     def get_average_rating(cls,data):
-        query= ''' SELECT * FROM Ratings WHERE ratings.bird_id = %(id)s;'''
+        query= ''' SELECT * FROM ratings WHERE ratings.bird_id = %(id)s;'''
         results = connectToMySQL(cls.db_name).query_db(query, data)
-
         ratings_sum = 0
         ratings_count = 0
         ratings_average = 0.0
@@ -85,4 +81,3 @@ class Rating:
             return "No Ratings Yet"
         ratings_average = ratings_sum/ratings_count
         return ratings_average
-
