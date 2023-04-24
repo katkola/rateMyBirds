@@ -26,23 +26,20 @@
         <h1>Create a Bird</h1>
     </div>
     <div class="col row"  style="margin: 10px; min-width: 550px;">
-        <form action="/bird/add" method="post" class="" style="min-width: 500px; max-width: fit-content;">
+        <form action="/bird/update/{{bird.id}}" method="post" class="" style="min-width: 500px; max-width: fit-content;">
             <div class="form-group">
                 <label for="species">Species</label>
-                <input class="form-control" type="text" name="species">
+                <input class="form-control" type="text" name="species" value="{{bird.species}}">
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
-                <input class="form-control" type="text" name="description">
+                <input class="form-control" type="text" name="description" value="{{bird.description}}">
             </div>
             <!-- <div class="form-group">
                 <label for="initialRating">Your Rating</label>
                 <input class="form-control" type="text" name="initialRating">
             </div> -->
             <div>
-            <div>
-                <input type="hidden" name="user_id" value="{user.id}">
-            </div>
                 <button class="btn btn-primary mt-1" type="submit">Submit</button>
             </div>
         </form>
