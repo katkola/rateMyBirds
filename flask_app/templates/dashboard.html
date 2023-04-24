@@ -37,11 +37,20 @@
                         <div class="list-inline-item">
                             <a href="/birds/single/{{bird.id}}">{{bird.species}}</a>
                         </div>
+                        {% if bird.user_id==user.id %}
+                        <div class="list-inline-item">
+                            Added By You!
+                        </div>
+                        <div class="list-inline-item">
+                            <a class="btn btn-danger" href="/edit/{{bird.id}}">Edit</a>
+                        </div>
+                        {% else %}
                         <div class="list-inline-item">
                             Added By
-                            <a href="/profile/{{bird.user_id}}">{{bird.user.firstname}}</a>
+                            <a class="" href="/profile/{{bird.user_id}}">{{bird.user.firstname}}</a>
                         </div>
-                        <div class="list-inline-item"> {{bird.avg_rating}}</div>
+                        {% endif %}
+                        <div class="list-inline-item"> Stars: {{bird.avg_rating}}</div>
                     </li>
                     {% endfor %}
                 </ul>

@@ -27,11 +27,7 @@ class Bird:
     @classmethod
     def update(cls,data):
             query = "UPDATE birds SET species=%(species)s,description=%(description)s WHERE id = %(id)s;"
-            data = {
-                "species": species,
-                "description": description
-            }
-            return connectToMySQL(cls.db_user).query_db(query,data)
+            return connectToMySQL(cls.db_name).query_db(query,data)
 
     @classmethod
     def get_all(cls):
