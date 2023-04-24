@@ -30,8 +30,6 @@ def register():
     session['firstname']= request.form['firstname']
     return redirect('/dashboard')
 
-
-
     
 @app.route("/login",methods=['POST'])
 def login():

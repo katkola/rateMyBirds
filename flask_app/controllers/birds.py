@@ -43,7 +43,12 @@ def one(bird_id):
     bird=Bird.get_one(data)
     ratings = Rating.get_ratings_for_bird(data)
     avg_rating = Rating.get_average_rating(data)
-    return render_template("oneBird.html", bird=bird, avg_rating=avg_rating, ratings=ratings)
+    find_rating = {
+        'user_id':session['user_id'],
+        'bird_id': bird_id
+    }
+    user_rating = User.get_user_rating(find_rating)
+    return render_template("oneBird.html",user_rating=user_rating, bird=bird, avg_rating=avg_rating, ratings=ratings)
 
 @app.route('/birds/new')
 def bird_form():
@@ -66,7 +71,3 @@ def dashboard():
     user = User.get_one(data)
 
     return render_template("dashboard.html", birds=Bird.get_all())
-
-@app.route('/stars')
-def startest():
-    return render_template('stars.html')
