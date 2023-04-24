@@ -29,24 +29,26 @@
                 </div>
             </div>
             <!-- right side -->
-            <div class="card bg-danger bg-opacity-10">
-                <h4 class="text-center">All Birds by All Users</h4>
+            <div class="card bg-opacity-10">
+                <h4 class="text-center">Created Birds</h4>
                 <ul class="list-group">
                     {% for bird in birds %}
-                    <li class="list-group-item m-1">
+                    <li class="list-group-item">
                         <div class="list-inline-item">
                             <a href="/birds/single/{{bird.id}}">{{bird.species}}</a>
+                        
+                        </div>
+                        <div class="list-inline-item">
+                            <a href="/edit">Edit</a>
                         </div>
                         <div class="list-inline-item">
                             Added By 
                             <a href="/profile/{{bird.user_id}}">{{bird.user.firstname}}</a>
                         </div>
-                                <div class="list-inline-item"> {{bird.avg_rating}}</div>
                     </li>
                     {% endfor %}
                 </ul>
             </div>
-            <i class="bi bi-star"></i>
         </div>
     </div>
 </body>

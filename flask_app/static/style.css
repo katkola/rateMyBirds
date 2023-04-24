@@ -1,9 +1,19 @@
 #background-image{
-    background-image: url('./img/Tropical\ birds-amico.png'); 
+    background-image: url('./img/tropicalbirdsamico.png'); 
     height: 100vh;
     width:100vw;
 }
 
 #navie{
     width:100vw; background-color: #D8E0F5; opacity: .8;
+}
+
+.btn-star{
+    height: 35px;
+    width: 35px;
+    background-image: url('./img/star.svg.svg');
+    background-size: cover;
+    background-color: rgb(251, 244, 205);
+    color: black;
+    border-radius: 50%;
 }
