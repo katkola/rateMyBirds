@@ -23,7 +23,7 @@
     <!-- body -->
     <div class="main row justify-content-around" id="mainBody">
         <div id="page-title" class="h3" style="text-align: center; min-width: 500px">
-            Birds Entered By {{user.firstname}} {{user.lastname}}
+            {{user.firstname | capitalize}} {{user.lastname | capitalize}}'s Aviary
         </div>
         <!-- left side -->
         <!-- <div class="col row align-content-start"  style="margin: 20px; min-width: 550px; max-width: 650px;">
