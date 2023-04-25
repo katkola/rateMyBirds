@@ -39,15 +39,6 @@
                     <h4>What do you think?</h4>
                     {% if not user_rating %}
                     <p></p>
-                    {% else %}
-                    <p>Your Rating: {{user_rating.value}}</p>
-                    {% endif %}
-
-
-                    <!-- rating.js file -->
-                    <div class="container">
-                        <span id="rateMe1"></span>
-                    </div>
                     <form action="/rating/add" method="POST" class="" style="min-width: 500px; max-width: fit-content;">
 
                         <div>
@@ -64,6 +55,32 @@
                         </div>
                         <button type="submit" class="btn-info btn">Submit Rating</button>
                     </form>
+                    {% else %}
+                    <p>Your Rating: {{user_rating.value}}</p>
+                    <form action="/bird/update/ratings" method="POST" class="" style="min-width: 500px; max-width: fit-content;">
+                        <input type="hidden" name="rating_id" value={{user_rating.id}}>
+                        <div>
+                            <label for="rating_value"></label>
+                            <input type="hidden" name="rating_value">
+                            <input id="btn1" class="btn-star" type="button" onclick="yup(value)" value="1" />
+                            <input id="btn2" class="btn-star" type="button" onclick="yup(value)" value="2" />
+                            <input id="btn3" class="btn-star" type="button" onclick="yup(value)" value="3" />
+                            <input id="btn4" class="btn-star" type="button" onclick="yup(value)" value="4" />
+                            <input id="btn5" class="btn-star" type="button" onclick="yup(value)" value="5" />
+                        </div>
+                        <div>
+                            <input type="hidden" name="bird_id" value={{bird.id}}>
+                        </div>
+                        <button type="submit" class="btn-info btn">Submit Rating</button>
+                    </form>
+                    {% endif %}
+
+
+                    <!-- rating.js file -->
+                    <div class="container">
+                        <span id="rateMe1"></span>
+                    </div>
+                    
                     <div>
                         <h4>Average RATING {{avg_rating}}</h4>
                         <h4>All Ratings</h4>

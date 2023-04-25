@@ -90,12 +90,24 @@ def edit(bird_id):
 @app.route("/bird/update/<int:bird_id>", methods=["POST"])
 def Update_bird(bird_id):
     data = {
-          "id": bird_id,
+        "id": bird_id,
         "species": request.form['species'],
         "description": request.form['description']
     }
     bird=Bird.update(data)
     return redirect("/dashboard")
+
+
+@app.route("/bird/update/ratings", methods=["POST"])
+def Update_rating():
+    data = {
+        "id": request.form['rating_id'],
+        'value': request.form['rating_value'],
+        'bird_id': request.form['bird_id']
+    }
+    rating=Rating.update(data)
+    birdId=data['bird_id']
+    return redirect(url_for('one', bird_id=birdId))
 
 @app.route("/birds/delete/<int:bird_id>")
 def delete_one(bird_id):
