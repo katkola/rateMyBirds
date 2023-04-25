@@ -22,7 +22,7 @@ class Rating:
         query= """UPDATE ratings 
                 SET value=%(value)s
                 WHERE id = %(id)s;"""
-        return connectToMySQL(cls.DB).query_db(query,data)
+        return connectToMySQL(cls.db_name).query_db(query,data)
 
     @classmethod
     def get_one(cls,data):
