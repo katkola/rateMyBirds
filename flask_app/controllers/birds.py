@@ -3,6 +3,7 @@ from flask import render_template,redirect,request,session,flash, url_for
 from flask_app.models.bird import Bird
 from flask_app.models.user import User
 from flask_app.models.rating import Rating
+from flask_app.models.newsmodel import News
 
 
 @app.route('/bird/add', methods=["POST"])
@@ -71,7 +72,8 @@ def dashboard():
         "id": session['user_id']
     }
     user = User.get_one(data)
-    return render_template("dashboard.html", birds=Bird.get_all(), user=user)
+    news = News.get_bird_headlines()
+    return render_template("dashboard.html", birds=Bird.get_all(), user=user, news=news)
 
 @app.route('/edit/<int:bird_id>')
 def edit(bird_id):
