@@ -97,7 +97,6 @@ def Update_bird(bird_id):
     bird=Bird.update(data)
     return redirect("/dashboard")
 
-
 @app.route("/bird/update/ratings", methods=["POST"])
 def Update_rating():
     data = {
