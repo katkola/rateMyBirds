@@ -91,6 +91,9 @@ class Bird:
 
     @classmethod
     def delete_one(cls, data):
+        query_one = "DELETE FROM ratings WHERE ratings.bird_id = %(id)s"
+        results_one = connectToMySQL(cls.db_name).query_db(query_one, data)
+
         query = "DELETE FROM birds WHERE id = %(id)s"
         results = connectToMySQL(cls.db_name).query_db(query, data)
         return results
