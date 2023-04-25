@@ -21,29 +21,6 @@ def create_bird():
     Bird.save(data)
     return redirect("/dashboard")
 
-
-@app.route('/rating/add', methods=["POST"] )
-def create_rating():
-    if 'user_id' not in session:
-        return redirect('/')
-    data = {
-        'value': request.form['rating_value'],
-        'bird_id': request.form['bird_id'],
-        'user_id': session['user_id']
-    }
-    Rating.save(data)
-    return('/birds/single/<bird_id>')
-
-
-@app.route('/birds/single/<int:bird_id>')
-def one(bird_id):
-    data ={
-        "id":bird_id
-    }
-    bird=Bird.get_one(data)
-    return render_template("oneBird.html", bird=bird)
-
-
 @app.route('/rating/add', methods=["POST"] )
 def create_rating():
     if 'user_id' not in session:
@@ -70,7 +47,7 @@ def one(bird_id):
         'user_id':session['user_id'],
         'bird_id': bird_id
     }
-    user_rating = User.get_user_rating(find_rating)
+    user_rating = Rating.get_user_rating(find_rating)
     return render_template("oneBird.html",user_rating=user_rating, bird=bird, avg_rating=avg_rating, ratings=ratings)
 
 
@@ -86,20 +63,6 @@ def bird_form():
     user = User.get_one(data)
     return render_template('newBirdForm.html', user=user)
 
-
-@app.route("/dashboard")
-def dashboard():
-    if 'user_id' not in session:
-        return redirect('/')
-
-    data = {
-        "id": session['user_id']
-    }
-    user = User.get_one(data)
-
-    return render_template('newBirdForm.html', user=user)
-
-
 @app.route("/dashboard")
 def dashboard():
     if 'user_id' not in session:
@@ -108,8 +71,7 @@ def dashboard():
         "id": session['user_id']
     }
     user = User.get_one(data)
-    return render_template("dashboard.html", birds=Bird.get_all())
-
+    return render_template("dashboard.html", birds=Bird.get_all(), user=user)
 
 @app.route('/edit/<int:bird_id>')
 def edit(bird_id):
@@ -128,12 +90,32 @@ def edit(bird_id):
 @app.route("/bird/update/<int:bird_id>", methods=["POST"])
 def Update_bird(bird_id):
     data = {
-          "id": bird_id,
+        "id": bird_id,
         "species": request.form['species'],
         "description": request.form['description']
     }
     bird=Bird.update(data)
     return redirect("/dashboard")
 
+@app.route("/bird/update/ratings", methods=["POST"])
+def Update_rating():
+    data = {
+        "id": request.form['rating_id'],
+        'value': request.form['rating_value'],
+        'bird_id': request.form['bird_id']
+    }
+    rating=Rating.update(data)
+    birdId=data['bird_id']
+    return redirect(url_for('one', bird_id=birdId))
 
-    return render_template("dashboard.html", birds=Bird.get_all())
+@app.route("/birds/delete/<int:bird_id>")
+def delete_one(bird_id):
+    if 'user_id' not in session:
+        return redirect('/')
+    data = {
+        "id": bird_id
+    }
+    bird = Bird.get_one(data)
+    if bird.user_id == session["user_id"]:
+        Bird.delete_one(data)
+    return redirect("/")

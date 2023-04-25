@@ -2,12 +2,7 @@ from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models.user import User
 
 class Rating:
-
-    db_name = 'birds_schema'
-
     db_name = 'birds-schema'
-
-
     def __init__(self, data):
         self.id = data['id']
         self.user_id = data['user_id']
@@ -22,14 +17,12 @@ class Rating:
             VALUES(%(value)s,%(bird_id)s, %(user_id)s,NOW(),NOW())'''
         return connectToMySQL(cls.db_name).query_db(query,data)
     
-
-    
     @classmethod
     def update(cls,data):
         query= """UPDATE ratings 
                 SET value=%(value)s
                 WHERE id = %(id)s;"""
-        return connectToMySQL(cls.DB).query_db(query,data)
+        return connectToMySQL(cls.db_name).query_db(query,data)
 
     @classmethod
     def get_one(cls,data):
@@ -40,28 +33,35 @@ class Rating:
         user = User.get_one({"id": results[0]["user_id"]})
         results[0]['user'] = user
         return cls(results[0])
+    
+    @classmethod
+    def get_user_rating(cls,data):
+        print(data)
+        query = """SELECT * FROM ratings
+                WHERE ratings.user_id= %(user_id)s
+                AND ratings.bird_id = %(bird_id)s;
+        """
+        results = connectToMySQL(cls.db_name).query_db(query,data)
+        if not results:
+            return False
+        
+        user = User.get_one({"id": results[0]["user_id"]})
+        results[0]['user'] = user
+        rating = results[0]
+
+        return rating
 
     @classmethod
     def get_ratings_for_bird(cls,data):
         query= ''' SELECT *
                 FROM Ratings
-
-                WHERE   '''
-        results = connectToMySQL(cls.db_name).query_db(query, data)
-
-        ratings = []
-        for rating in results:
-            user = User.get_one({"id": rating[0]["user_id"]})
-
                 WHERE bird_id= %(id)s'''
         results = connectToMySQL(cls.db_name).query_db(query, data)
-        
         ratings = []
         if not results:
             return ratings
         for rating in results:
             user = User.get_one({"id": rating["user_id"]})
-
             rating['user'] = user
             ratings.append(cls(rating))
         return ratings
@@ -69,23 +69,8 @@ class Rating:
 
     @classmethod
     def get_average_rating(cls,data):
-
         query= ''' SELECT * FROM ratings WHERE ratings.bird_id = %(id)s;'''
         results = connectToMySQL(cls.db_name).query_db(query, data)
-
-        ratings = []
-        ratings_sum = 0
-        ratings_count = 0
-        rating_average = 0.0
-        for rating in ratings:
-            ratings_sum+= cls(rating).value
-            ratings_count+=1
-        ratings_total = ratings_sum/ratings_count
-        return ratings_total
-
-        query= ''' SELECT * FROM Ratings WHERE ratings.bird_id = %(id)s;'''
-        results = connectToMySQL(cls.db_name).query_db(query, data)
-
         ratings_sum = 0
         ratings_count = 0
         ratings_average = 0.0
@@ -96,4 +81,3 @@ class Rating:
             return "No Ratings Yet"
         ratings_average = ratings_sum/ratings_count
         return ratings_average
-

@@ -24,18 +24,6 @@ class User:
         return connectToMySQL(cls.db_name).query_db(query,data)
 
     @classmethod
-    def get_user_rating(cls,data):
-        print(data)
-        query = """SELECT * FROM ratings
-            WHERE ratings.user_id= %(user_id)s
-            AND ratings.bird_id = %(bird_id)s
-        """
-        results = connectToMySQL(cls.db_name).query_db(query)
-        if not results:
-            return False
-        return cls(results[0])
-
-    @classmethod
     def get_all(cls):
         query = "SELECT * FROM users;"
         results = connectToMySQL(cls.db_name).query_db(query)
