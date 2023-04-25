@@ -136,4 +136,4 @@ def Update_bird(bird_id):
     return redirect("/dashboard")
 
 
-    return render_template("dashboard.html", birds=Bird.get_all())d
+    return render_template("dashboard.html", birds=Bird.get_all())
