@@ -19,6 +19,9 @@
     background-size: 100vh;
     height: 100vh;
 }
+
+#navie{
+    width:100vw; 
     background-color: rgb(123,150,223,1); 
     opacity: .7;
 }
