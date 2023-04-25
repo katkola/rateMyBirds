@@ -17,40 +17,44 @@
         <div id="navie" class="navbar p-3">
             <a class="navbar-brand mx-2" href="/dashboard">Rate My Birds</a>
             <div class="navbar-item">
+                <div class="navbar-text me-2"><a href="/profile/{{session[user.id]}}">Your Profile</a></div>
+            </div>
+            <div class="navbar-item">
+                <div class="navbar-text me-2"><a href="/birds/new" class="text-decoration-none h3">New Bird</a></div>
+            </div>
+            <div class="navbar-item">
                 <div class="navbar-text me-2"><a href="/logout">Logout</a></div>
             </div>
         </div>
         <!-- body -->
-        <div class="m-2" id="mainBody">
+        <div class="m-2 row" id="mainBody">
             <!-- left side -->
-            <div class="card text-center">
-                <div class="card-body">
+            <div class="text-center col row align-content-center" style="min-width: 300px; max-height: 100vw;">
+                <div class="card col" style="height:50px">
                     <a href="/birds/new" class="text-decoration-none h3">New Bird</a>
                 </div>
             </div>
             <!-- right side -->
-            <div class="card bg-danger bg-opacity-10">
+            <div class="card bg-transparent m-1 col" style="min-width: 300px">
                 <h4 class="text-center">All Birds by All Users</h4>
-                <ul class="list-group">
+                <ul class="list-group bg-black bg-opacity-10">
                     {% for bird in birds %}
-                    <li class="list-group-item m-1">
-                        <div class="list-inline-item">
-                            <a href="/birds/single/{{bird.id}}">{{bird.species}}</a>
+                    <li class="row m-2 align-content-between">
+                        <div class="col">
+                            <a href="/birds/single/{{bird.id}}">{{bird.species | capitalize}}</a>
                         </div>
                         {% if bird.user_id==user.id %}
-                        <div class="list-inline-item">
+                        <div class="col">
                             Added By You!
-                        </div>
-                        <div class="list-inline-item">
-                            <a class="btn btn-danger" href="/edit/{{bird.id}}">Edit</a>
+                            <a class="btn" href="/edit/{{bird.id}}">Edit</a>
                         </div>
                         {% else %}
-                        <div class="list-inline-item">
+                        <div class="col">
                             Added By
-                            <a class="" href="/profile/{{bird.user_id}}">{{bird.user.firstname}}</a>
+                            <a class="" href="/profile/{{bird.user_id}}">{{bird.user.firstname | capitalize}}</a>
                         </div>
                         {% endif %}
-                        <div class="list-inline-item"> Stars: {{bird.avg_rating}}</div>
+                        <div class="col"> Stars: {{bird.avg_rating}}</div>
                     </li>
                     {% endfor %}
                 </ul>
