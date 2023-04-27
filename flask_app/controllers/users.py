@@ -65,3 +65,4 @@ def profile(userId):
     user = User.get_one(data)
 
     return render_template("profile.html", user=user, birds=Bird.get_birds_by_user(data))
+

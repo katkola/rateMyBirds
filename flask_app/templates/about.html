@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/style.css">
+    <title>About RMB</title>
+</head>
+
+<body>
+    <div id="background-image">
+        <!-- navigation -->
+        <div id="navie" class="navbar p-3">
+            <a class="navbar-brand mx-2" href="/dashboard">Rate My Birds</a>
+            <div class="navbar-item">
+                <div class="navbar-text me-2"><a href="/profile/{{session['user_id']}}">Your Profile</a></div>
+            </div>
+            <div class="navbar-item">
+                <div class="navbar-text me-2"><a href="/birds/new" class="text-decoration-none h3">New Bird</a></div>
+            </div>
+            <div class="navbar-item">
+                <div class="navbar-text me-2"><a href="/logout">Logout</a></div>
+            </div>
+        </div>
+        <!-- body -->
+        <div class="main row justify-content-around" id="mainBody">
+            <div id="page-title" style="text-align: center; min-width: 500px">
+                <div class="h2">Feathered Flask</div>
+                <div class="h5 ">About "Rate My Birds"</div>
+            </div>
+
+            <div class="col row align-content-start" style="margin: 20px; min-width: 300px; max-width: 650px;">
+                <div class="col card-body container-fluid m-1">
+                    <div class="h3 p-1 card text-info fw-semibold">Developers:</div>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            Jake O'Donnell- <i>Backend/API</i>
+                        </li>
+                        <li class="list-group-item">
+                            Quin Tice - <i>Frontend/Backend</i>
+                        </li>
+                        <li class="list-group-item">
+                            Kat Hogan- <i>Frontend/Project Lead</i>
+                        </li>
+                        <li class="list-group-item">
+                            Wayne Mengel - <i>Backend</i>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col card-body container-fluid m-1">
+                    <div class="h3 p-1 card text-info fw-semibold">Created With:</div>
+                    <ul class="list-group">
+                        <li class="list-group-item">Written in Python/Flask</li>
+                        <li class="list-group-item">Bird Profile Pictures from <a
+                                href="https://rapidapi.com/OpenedAI/api/dall-e-bird-images-from-text/">OpenedAI</a></li>
+                        <li class="list-group-item">Birds News from <a href="https://newsapi.org/">News API</a></li>
+                        <li class="list-group-item">Background Photo from <a
+                                href="https://storyset.com/nature">Storyset</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
+
+</html>

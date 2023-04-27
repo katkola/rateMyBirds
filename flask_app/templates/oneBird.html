@@ -15,10 +15,16 @@
 <body>
     <div id="background-image">
         <!-- navigation -->
-        <div id="navie" class="navbar">
+        <div id="navie" class="navbar p-3">
             <a class="navbar-brand mx-2" href="/dashboard">Rate My Birds</a>
             <div class="navbar-item">
-                <div class="navbar-text m-1"><a href="/logout">Logout</a></div>
+                <div class="navbar-text me-2"><a href="/profile/{{session['user_id']}}">Your Profile</a></div>
+            </div>
+            <div class="navbar-item">
+                <div class="navbar-text me-2"><a href="/birds/new" class="text-decoration-none h3">New Bird</a></div>
+            </div>
+            <div class="navbar-item">
+                <div class="navbar-text me-2"><a href="/logout">Logout</a></div>
             </div>
         </div>
 

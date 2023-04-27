@@ -20,3 +20,7 @@ def news():
     articles = top_headlines['articles']
 
     return render_template('news.html', articles=articles)
+
+@app.route('/about')
+def about_devs():
+    return render_template('about.html')

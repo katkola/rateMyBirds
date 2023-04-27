@@ -23,48 +23,59 @@
                 <div class="navbar-text me-2"><a href="/birds/new" class="text-decoration-none h3">New Bird</a></div>
             </div>
             <div class="navbar-item">
+                <div class="navbar-text me-2"><a href="/about" class="text-decoration-none h3">About RMB</a></div>
+            </div>
+            <div class="navbar-item">
                 <div class="navbar-text me-2"><a href="/logout">Logout</a></div>
             </div>
         </div>
         <!-- body -->
-        <div class="m-2 row" id="mainBody">
+
+        <div class="m-1 row" id="mainBody">
             <!-- left side -->
-            <div class="text-center col row" style="min-width: 300px; max-height: 90vw;">
-                <ul class="card list-group" style="height:80%; overflow:auto;">
-                    <h4>Bird News</h4>
-                    {% for article in news %}
+            <div class="text-center col row card m-1" style="min-width: 350px;">
+                <div>
+                    <a href="/news" class="btn h4" style="text-decoration: none;">Bird News</a>
+                </div>
+                <div style="min-width: 300px; max-height: 80vh; overflow:auto;">
+                    <ul class="list-group" style="height:100%;">
+                    
+                        {% for article in news %}
                         <li class="card-title fw-bold text-start">
                             <a href={{article.url}}>{{article.title}}</a>
                             <p>{{article.description}}</p>
                         </li>
 
-                    {% endfor %}
-                </ul>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
             <!-- right side -->
-            <div class="card bg-transparent m-1 col" style="min-width: 300px; height:100%; overflow:auto;">
+            <div  class="card bg-transparent m-1 col" style="min-width: 350px;">
                 <h4 class="text-center">All Birds by All Users</h4>
-                <ul class="list-group bg-black bg-opacity-10">
-                    {% for bird in birds %}
-                    <li class="row m-2 align-content-between">
-                        <div class="col">
-                            <a href="/birds/single/{{bird.id}}">{{bird.species | capitalize}}</a>
-                        </div>
-                        {% if bird.user_id==user.id %}
-                        <div class="col">
-                            Added By You!
-                            <a class="btn" href="/edit/{{bird.id}}">Edit</a>
-                        </div>
-                        {% else %}
-                        <div class="col">
-                            Added By
-                            <a class="" href="/profile/{{bird.user_id}}">{{bird.user.firstname | capitalize}}</a>
-                        </div>
-                        {% endif %}
-                        <div class="col"> Stars: {{bird.avg_rating}}</div>
-                    </li>
-                    {% endfor %}
-                </ul>
+                <div style="min-width: 300px; max-height: 80vh; overflow:auto;">
+                    <ul class="list-group bg-black bg-opacity-10">
+                        {% for bird in birds %}
+                        <li class="row m-2 align-content-between">
+                            <div class="col">
+                                <a href="/birds/single/{{bird.id}}">{{bird.species | capitalize}}</a>
+                            </div>
+                            {% if bird.user_id==user.id %}
+                            <div class="col">
+                                Added By You!
+                                <a class="btn" href="/edit/{{bird.id}}">Edit</a>
+                            </div>
+                            {% else %}
+                            <div class="col">
+                                Added By
+                                <a class="" href="/profile/{{bird.user_id}}">{{bird.user.firstname | capitalize}}</a>
+                            </div>
+                            {% endif %}
+                            <div class="col"> Stars: {{bird.avg_rating}}</div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
